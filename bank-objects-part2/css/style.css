@@ -1,0 +1,94 @@
+html {
+   font-family: 'Oxygen', sans-serif;
+}
+
+.container {
+    width: 75%;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    line-height: 1.8em;
+    font-size: 240%;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+}
+
+h1::first-letter {
+    color: lightseagreen;
+    font-size: 200%;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-gap: 20px;
+    background-color: #fff;
+    color: #444;
+}
+
+.box {
+    background-color: #fff;
+    color: black;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 150%;
+    border: 0.9px solid lightgray;
+}
+
+.box h2 {
+    font-size: 90%;
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+
+.box button.big-round-corner-button {
+    margin-top: 20px;
+    background-color: lightseagreen;
+}
+
+.box select.mdc-select {
+    width: 90%;
+}
+
+.g {
+    overflow-y: scroll;
+    max-height: 250px;
+}
+
+input.mdc-textfield__input {
+    font-size: 60%;
+}
+
+.transaction-li {
+    margin: 0;
+    padding-left: 0;
+}
+
+.transaction-li {
+    position: relative;
+    top: -15px;
+    margin: 0;
+    padding: 0;
+}
+
+.amount {
+    padding-left: 20%;
+}
+
+.mdc-list-item__text {
+    color: #8c8c8c;
+}
+
+.mdc-list-item__text__secondary {
+    color: #8c8c8c;
+}
+
+li:hover {
+    background-color: white;
+}
+
+li:active {
+    background-color: white;
+}

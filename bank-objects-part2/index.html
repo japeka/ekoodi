@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Application</title>
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/material-component.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="scripts/base.js"></script><script src="scripts/banks.js"></script>
+    <script src="scripts/bank.js"></script><script src="scripts/customer.js"></script>
+    <script src="scripts/account.js"></script><script src="scripts/transaction.js"></script>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h1>Bank Application</h1>
+            <div class="wrapper">
+                <div class="box a">
+                  <h2>Banks</h2>
+                    <select class="mdc-select" id="banks"></select><br>
+                    <button id="removeBank" class="mdc-button mdc-button--unelevated big-round-corner-button">Remove</button>
+                </div>
+
+                <div class="box b">
+                  <h2>Customers</h2>
+                  <select class="mdc-select" id="customers">
+                      <option data-bank-id="-1" data-customer-id="-1" value="" selected="">Select customer</option>
+                  </select>
+                   <br>
+                   <button id="removeCustomer" class="mdc-button mdc-button--unelevated big-round-corner-button">Remove</button>
+                </div>
+                <div class="box c">
+                  <h2>Accounts</h2>
+                    <select class="mdc-select" id="accounts">
+                        <option data-bank-id="-1" data-customer-id="-1" data-account-id='-1' value="" selected="">Select IBAN</option>
+                    </select>
+                    <br>
+                    <button id="removeAccount" class="mdc-button mdc-button--unelevated big-round-corner-button">Remove</button>
+                </div>
+
+                <div class="box g">
+                    <h2>Transactions</h2>
+                    <ul class="mdc-list mdc-list--dense transaction-li" id="transactions"></ul>
+                </div>
+
+                <div class="box d">
+                    <h2>Bank</h2>
+                    <div class="mdc-textfield">
+                        <input type="text" id="bank-name" class="mdc-textfield__input" placeholder="Bank Name">
+                    </div>
+                    <div class="mdc-textfield">
+                        <input type="text"  id="bank-bic" class="mdc-textfield__input" placeholder="Bank BIC">
+                    </div>
+                    <button id="addBank" class="mdc-button mdc-button--unelevated big-round-corner-button">New</button>
+                    <button id="editBank" class="mdc-button mdc-button--unelevated big-round-corner-button">Edit</button>
+                </div>
+
+                <div class="box e">
+                    <h2>Customer</h2>
+                    <div class="mdc-textfield">
+                        <input type="text" id="customer-firstname" class="mdc-textfield__input" placeholder="First Name">
+                    </div>
+                    <div class="mdc-textfield">
+                        <input type="text" id="customer-lastname" class="mdc-textfield__input" placeholder="Last Name">
+                    </div>
+                    <button id="addCustomer" class="mdc-button mdc-button--unelevated big-round-corner-button">New</button>
+                    <button id="editCustomer" class="mdc-button mdc-button--unelevated big-round-corner-button">Edit</button>
+                </div>
+
+                <div class="box f">
+                    <h2>Account</h2>
+                    <div class="mdc-textfield">
+                        <input type="text" id="account-name" class="mdc-textfield__input" placeholder="Account Name">
+                    </div>
+                    <div class="mdc-textfield">
+                        <input type="text" id="account-iban" class="mdc-textfield__input" placeholder="IBAN">
+                    </div>
+                    <button id="addAccount" class="mdc-button mdc-button--unelevated big-round-corner-button">New</button>
+                    <button id="editAccount" class="mdc-button mdc-button--unelevated big-round-corner-button">Edit</button>
+                </div>
+
+                <div class="box c">
+                    <h2>New Transaction</h2>
+                    <div class="mdc-textfield">
+                        <input disabled type="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" id="transaction-date" class="mdc-textfield__input" placeholder="Date">
+                    </div>
+                    <div class="mdc-textfield">
+                        <input disabled type="number" id="transaction-amount" class="mdc-textfield__input" placeholder="Amount">
+                    </div>
+                    <button id="addNewTransaction" disabled class="mdc-button mdc-button--unelevated big-round-corner-button">New</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="scripts/populatetestdata.js"></script><script src="scripts/baseoperations.js"></script>
+    <script src="scripts/transactionoperations.js"></script><script src="scripts/bankoperations.js"></script>
+    <script src="scripts/customeroperations.js"></script><script src="scripts/accountoperations.js"></script>
+</body>
+</html>
