@@ -1,0 +1,7 @@
+<mat-list-item>
+    <mat-icon mat-list-icon color="primary" style="font-size:2em;">face</mat-icon>
+    <h4 mat-line>{{user.firstName}}</h4>
+    <p mat-line> {{user.lastName}} </p>
+    <mat-icon (click)="onRemoveSelect(user)" color="error" style="cursor:pointer;" class="mat-icon material-icons" matsuffix="" role="img" aria-hidden="true">mode_delete</mat-icon>
+</mat-list-item>
+

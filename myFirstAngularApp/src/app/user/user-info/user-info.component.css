@@ -1,0 +1,8 @@
+mat-list-item {
+  width: 35%;
+}
+
+mat-icon[class*="error"] {
+  font-size: 1.4em;  
+}
+

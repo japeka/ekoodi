@@ -1,0 +1,22 @@
+<h2>Add New User</h2>
+<div class="example-container">
+    <mat-form-field>
+      <input  matInput placeholder="Firstname" [(ngModel)]="user.firstName" #ctrl="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Lastname" [(ngModel)]="user.lastName" #ctrl="ngModel">
+    </mat-form-field>
+    <button color="primary" mat-raised-button (click)="onAddNewUser()">Add New User</button>
+    <mat-error *ngIf="isValidInput">Enter valid inputs</mat-error>
+  </div>
+
+  <h2 [class]='titleClass'>{{title}}</h2>
+  <mat-list *ngFor="let user of users" (click)="onUserSelect(user)">
+  <app-user-info [user]="user" (userRemoveSelected) = "onRemoveSelect(user)"></app-user-info> 
+</mat-list>
+
+<!--
+  <div *ngFor="let user of users" (click)="onUserSelect(user)">
+   <app-user-info [user]="user"></app-user-info> 
+  </div>
+-->
