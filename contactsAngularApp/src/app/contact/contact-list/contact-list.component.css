@@ -1,0 +1,8 @@
+.errors {
+    color: #8B1E1E;
+    border: 2px solid red;
+    padding: 10px;
+    width: 85%;
+    font-size: 90%;
+    background-color: #F8E1E4;
+}

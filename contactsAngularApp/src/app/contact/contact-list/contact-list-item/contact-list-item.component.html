@@ -1,0 +1,16 @@
+<mat-list-item>
+  <mat-icon mat-list-icon style="font-size:2em;">face</mat-icon>
+  <h4 style="cursor:pointer;" mat-line>{{contact.firstName}}</h4>
+  <p style="cursor:pointer;" mat-line> {{contact.lastName}} </p>
+  <span> 
+    <!--
+      <mat-icon disabled="true" mat-list-icon class="mat-icon material-icons"
+      matsuffix="" role="img" aria-hidden="true">edit</mat-icon>
+    -->
+   </span>
+   <span>
+      <mat-icon style="cursor:pointer;" mat-list-icon (click)="onRemoveSelect(contact)" class="mat-icon material-icons"
+      matsuffix="" role="img" aria-hidden="true">delete</mat-icon>
+   </span>
+</mat-list-item>
+
