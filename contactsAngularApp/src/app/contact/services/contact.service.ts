@@ -14,7 +14,7 @@ export class ContactService {
    this.contacts = this.getContactsFromStorage();
    }
 
-   storeContactsToStore() {
+   addContactsToStorage() {
       if(this.contacts) {
         localStorage.removeItem('contacts');
         localStorage.setItem('contacts',JSON.stringify(this.contacts));
@@ -44,7 +44,7 @@ export class ContactService {
 
   deleteContact(contact: Contact): void {
     this.contacts.splice(_.findIndex(this.contacts, function(o) { return o.id == contact.id; }),1);
-    this.storeContactsToStore();
+    this.addContactsToStorage();
   }
 
   addContact(contact: Contact): void {
@@ -59,7 +59,7 @@ export class ContactService {
       this.contacts.push(Object.assign({}, new Contact(0,contact.firstName, contact.lastName,
       contact.phone,contact.gender,this.getAvatarPicture(contact.gender),contact.streetAddress, contact.city)));
     }
-    this.storeContactsToStore();
+    this.addContactsToStorage();
   }
   
 

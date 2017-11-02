@@ -1,10 +1,11 @@
+<!-- (expanded)="pExpanded" #expPanel (expanded)="pExpanded" hideToggle="true" -->
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>Add New Contact</mat-panel-title>
     <mat-panel-description></mat-panel-description>
   </mat-expansion-panel-header>
   
-  <p *ngIf="isValidInput" class="errors" mat-line><strong>Errors!</strong><br>Provide input for your firstname, lastname, phone number, gender, street address and city</p>
+  <p *ngIf="isInValidInput" class="errors" mat-line><strong>Errors!</strong><br>Please provide input for your firstname, lastname, phone number, gender, street address and city</p>
 
   <mat-form-field>
     <input matInput placeholder="First name" [(ngModel)]="contact.firstName" #ctrl="ngModel">
@@ -35,6 +36,7 @@
 <div class="elementContainer">
   <div class="contactList">
   <h2> {{title}} </h2>
+  <hr>
   <mat-list dense *ngFor="let contact of contacts" (click)="onContactSelect(contact)">
     <!-- <app-user-info [user]="user" (contactRemoveSelected) = "onRemoveSelect(contact)"></app-user-info> -->
     <app-contact-list-item [contact]="contact" (contactRemoveSelected) = "onRemoveSelect(contact)"></app-contact-list-item>
@@ -44,9 +46,10 @@
 <!-- tee oma komponentti tästä -->
 <div class="contactCard">
     <h2>Contact Card</h2>
+    <hr>
     <mat-card *ngIf="contactSelected"  class="example-card">
         <mat-card-header>
-        <mat-card-title style="font-size: 1.2em;font-weight: 700;">{{contactSelected.firstName}} {{contactSelected.lastName}}  <small style="font-weight: 400;font-size:0.48em;">({{contactSelected.gender==0 ? 'female': 'male'}})</small></mat-card-title>
+        <mat-card-title style="font-size: 1.2em;font-weight: 700;">{{contactSelected.firstName}} {{contactSelected.lastName | uppercase}}  <small style="font-weight: 400;font-size:0.48em;">({{contactSelected.gender==0 ? 'female': 'male'}})</small></mat-card-title>
         </mat-card-header>
         <mat-card-content>
           

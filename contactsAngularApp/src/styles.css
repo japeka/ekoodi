@@ -1,12 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Antic+Slab');
 html {
     margin: 0;
     padding: 0;
+    font-family: 'Antic Slab', serif;
+}
+body {
+    background-color: #F7F7F2;
 }
 div#container {
-    width: 75%;
+    width: 70%;
     margin: 0 auto;
 }
 h1 {
@@ -40,3 +45,10 @@ mat-card-title {
     font-size: 2em;
     font-weight: bold;
 }
+
+hr  {
+    border: 0;
+    border-bottom: 1.5px solid #ccc;
+    background: #999;
+}
+

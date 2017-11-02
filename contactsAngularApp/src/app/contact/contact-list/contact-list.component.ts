@@ -13,12 +13,12 @@ export class ContactListComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
   contactSelected: Contact;
-  isValidInput: Boolean;
-  
+  isInValidInput: Boolean;
+
   constructor(private contactService: ContactService) {
     this.title = 'Contacts List';
     this.contacts = this.contactService.getContacts();
-    this.isValidInput = false;
+    this.isInValidInput = false;
     this.contact = new Contact();
    }
 
@@ -28,12 +28,13 @@ export class ContactListComponent implements OnInit {
     this.contactSelected = contact;
   }
 
-  onRemoveSelect(contact: Contact){
+  onRemoveSelect(contact: Contact) {
     this.contactService.deleteContact(contact);
     this.contactSelected = null;
   }
-  
+
   onAddNewContact() {
+    
     if(this.contact.firstName && this.contact.lastName && this.contact.phone && this.contact.gender
       && this.contact.streetAddress && this.contact.city) {
         this.contactService.addContact(this.contact);
@@ -42,9 +43,9 @@ export class ContactListComponent implements OnInit {
         this.contact.phone = "";
         this.contact.streetAddress = "";
         this.contact.city = "";
-        this.isValidInput = false;      
-    } else {
-       this.isValidInput = true;      
+        this.isInValidInput = false;   
+      } else {
+       this.isInValidInput = true;      
       }
   }
 
