@@ -8,12 +8,11 @@ export class ContactService {
   private contacts: Contact[];
   private avatars: string[][];
   private avatarUrl: string;
-
   constructor() {
-    this.avatars = [['02','04','06','12','20','18'],['03','11','05','09','15','13']]; 
-    this.avatarUrl = 'http://svgavatars.com/style/svg/';
-    this.contacts = this.getContactsFromStorage();
-  }
+   this.avatars = [['02','04','06'],['03','11','05']]; 
+   this.avatarUrl = 'http://svgavatars.com/style/svg/';
+   this.contacts = this.getContactsFromStorage();
+   }
 
    addContactsToStorage() {
       if(this.contacts) {
@@ -34,7 +33,7 @@ export class ContactService {
    }
 
    getAvatarPicture(gender: number) {
-    let position = Math.floor(Math.random() * 6) 
+    let position = Math.floor(Math.random() * 3) 
     return this.avatarUrl + this.avatars[gender][position] + '.svg';
    }
    
@@ -55,34 +54,13 @@ export class ContactService {
       k++;contact.id = k;
       contact.avatar = this.getAvatarPicture(contact.gender);
       this.contacts.push(Object.assign({}, contact));
+
     } else {
-      contact.id = 0;
-      this.contacts.push(Object.assign({}, new Contact(contact.id,contact.firstName, contact.lastName,
+      this.contacts.push(Object.assign({}, new Contact(0,contact.firstName, contact.lastName,
       contact.phone,contact.gender,this.getAvatarPicture(contact.gender),contact.streetAddress, contact.city)));
     }
     this.addContactsToStorage();
   }
- 
-  genderIsSame(id: number, _gender: number): Boolean {
-    var _contacts = this.getContactsFromStorage();
-    let position = _.findIndex(_contacts, function(o) { return o.id == id; });
-    return _contacts[position].gender === _gender;
-  }
-
-  updateContact(contact: Contact): void {
-    if(this.contacts.length > 0) {
-      let position = _.findIndex(this.contacts, function(o) { return o.id == contact.id; });
-      if(!this.genderIsSame(contact.id, contact.gender)) {
-        contact.avatar = this.getAvatarPicture(contact.gender);      
-      }
-      this.contacts[position]= contact;
-      this.addContactsToStorage();
-    }
-  }
-
-  findContactById(id: number): Contact {
-    let position = _.findIndex(this.contacts, function(o) { return o.id == id; });
-    return this.contacts[position];    
-  }
+  
 
 }
