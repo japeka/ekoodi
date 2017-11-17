@@ -1,0 +1,149 @@
+
+
+
+
+expPanel.open()
+
+statusReady ? expPanel.close() : expPanel.close()
+
+<button class="mat-raised-button mat-primary" color="primary" mat-raised-button=""><span class="mat-button-wrapper">
+Add New Contact</span><div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-trigger="[object HTMLButtonElement]" ng-reflect-centered="false" ng-reflect-disabled="false"></div><div class="mat-button-focus-overlay"></div></button>
+
+4.2.4	5.0.0
+
+4.4.6	animations
+
+
+<!-- 
+<div id="container">
+<h1>{{title}}</h1>
+<app-contact-list></app-contact-list>
+</div>
+
+kontakti view -> muokkaus
+poisto sieltä
+
+*lisäys
+*muokkaus samaa komponenttia
+-->
+
+
+
+<!-- fxHide.xs style="border-right: 1px solid black;" 
+<div fxLayout="row" fxFill> 
+        <div fxFlex="25" fxLayout="column" fxLayoutAlign="top left">
+            <mat-sidenav-container>
+               <div class="my-content">
+                   <button class="mat-raised-button mat-primary" color="primary" (click)="showContactsList()" mat-raised-button="">User List</button>
+                </div>                        
+               <div class="my-content">
+                    <button mat-raised-button (click)="addNewContact()">New Contact</button>                   
+                </div>                        
+             </mat-sidenav-container>
+        </div>
+        <div fxFlex fxLayout="column" fxLayoutAlign="top left">
+
+        </div>
+</div>
+-->
+<!-- <router-outlet></router-outlet> -->
+
+
+
+<div fxLayout="row" fxFill> 
+  <div fxFlex="100" fxLayout="column" fxLayoutAlign="top left">
+	  <p *ngIf="isInValidInput" class="errors" mat-line><strong>Errors!</strong><br>Please provide input for your firstname, lastname, phone number, gender, street address and city</p>
+	  <mat-form-field>
+		<input matInput placeholder="First name" [(ngModel)]="contact.firstName" #ctrl="ngModel">
+	  </mat-form-field>
+	  <mat-form-field>
+		<input matInput placeholder="Last name" [(ngModel)]="contact.lastName" #ctrl="ngModel">
+	  </mat-form-field>
+	  <br>
+	  <mat-form-field>
+		<input matInput placeholder="Phone number" [(ngModel)]="contact.phone" #ctrl="ngModel">
+	  </mat-form-field>
+	   <mat-radio-group [(ngModel)]="contact.gender">
+		  <mat-radio-button checked=true value="0">Female</mat-radio-button>
+		  <mat-radio-button value="1">Male</mat-radio-button>
+	   </mat-radio-group>
+	  <br>
+	  <mat-form-field>
+		<input matInput placeholder="Street Address" [(ngModel)]="contact.streetAddress" #ctrl="ngModel">
+	  </mat-form-field>
+
+	  <mat-form-field>
+		<input matInput placeholder="City" [(ngModel)]="contact.city" #ctrl="ngModel">
+	  </mat-form-field>
+	  <br>  
+	  <button color="primary" mat-raised-button (click)="onAddNewContact()">Add New Contact</button>
+  </div>
+</div>
+
+
+
+[{"id":0,"firstName":"janne","lastName":"kallio","phone":"02-9299992","gender":"1","avatar":"http://svgavatars.com/style/svg/11.svg","streetAddress":"Asemakatu 1 A 2","city":"Pori"},{"id":1,"firstName":"ari","lastName":"kallio","phone":"02-920999992","gender":"1","avatar":"http://svgavatars.com/style/svg/03.svg","streetAddress":"Tullikatu 22 A ","city":"Oulu"},{"id":2,"firstName":"pasi","lastName":"kallio","phone":"02-920999992","gender":"1","avatar":"http://svgavatars.com/style/svg/03.svg","streetAddress":"Tullikatu 22 A ","city":"Oulu"},{"id":3,"firstName":"pasi","lastName":"kalliomaailmanaperä","phone":"02-920999992","gender":"1","avatar":"http://svgavatars.com/style/svg/03.svg","streetAddress":"Tullikatu 22 A ","city":"Oulu"}]
+
+
+vanha formi
+<!-- (expanded)="pExpanded" #expPanel (expanded)="pExpanded" hideToggle="true" -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Add New Contact</mat-panel-title>
+    <mat-panel-description></mat-panel-description>
+  </mat-expansion-panel-header>
+  
+  <p *ngIf="isInValidInput" class="errors" mat-line><strong>Errors!</strong><br>Please provide input for your firstname, lastname, phone number, gender, street address and city</p>
+
+  <mat-form-field>
+    <input matInput placeholder="First name" [(ngModel)]="contact.firstName" #ctrl="ngModel">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Last name" [(ngModel)]="contact.lastName" #ctrl="ngModel">
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Phone number" [(ngModel)]="contact.phone" #ctrl="ngModel">
+  </mat-form-field>
+   <mat-radio-group [(ngModel)]="contact.gender">
+      <mat-radio-button checked=true value="0">Female</mat-radio-button>
+      <mat-radio-button value="1">Male</mat-radio-button>
+   </mat-radio-group>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Street Address" [(ngModel)]="contact.streetAddress" #ctrl="ngModel">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="City" [(ngModel)]="contact.city" #ctrl="ngModel">
+  </mat-form-field>
+  <br>  
+  <button color="primary" mat-raised-button (click)="onAddNewContact()">Add New Contact</button>
+</mat-expansion-panel>
+
+      
+<!-- tee oma komponentti tästä -->
+<div class="contactCard">
+    <h2>Contact Card</h2>
+    <hr>
+    <mat-card *ngIf="contactSelected"  class="example-card">
+        <mat-card-header>
+        <mat-card-title style="font-size: 1.2em;font-weight: 700;">{{contactSelected.firstName}} {{contactSelected.lastName | uppercase}}  <small style="font-weight: 400;font-size:0.48em;">({{contactSelected.gender==0 ? 'female': 'male'}})</small></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          
+        <img width="35%;" src="{{contactSelected.avatar}}" alt="{{contactSelected.firstName}} {{contactSelected.lastName}}">
+          <p mat-line><strong>Phone: </strong><br> {{contactSelected.phone}} </p> 
+          <p mat-line><strong>Street Address: </strong><br> {{contactSelected.streetAddress}} </p> 
+          <p mat-line><strong>City: </strong><br>{{contactSelected.city}} </p> 
+        </mat-card-content>
+      </mat-card>
+</div>
+
+mat-icon
+	h4
+	p
+	span	
+		mat-icon
+
+	  

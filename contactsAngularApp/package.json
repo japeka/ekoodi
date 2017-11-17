@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open",
+    "start": "ng serve --open --port 4203",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -13,22 +13,25 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^4.4.6",
-    "@angular/cdk": "^2.0.0-beta.12",
+    "@angular/cdk": "2.0.0-beta.12",
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
     "@angular/core": "^4.2.4",
+    "@angular/flex-layout": "^2.0.0-beta.10-4905443",
     "@angular/forms": "^4.2.4",
     "@angular/http": "^4.2.4",
-    "@angular/material": "^2.0.0-beta.12",
+    "@angular/material": "2.0.0-beta.12",
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "core-js": "^2.4.1",
+    "ngx-order-pipe": "^1.1.0",
+    "ngx-pipes": "^2.0.5",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.4.9",
+    "@angular/cli": "^1.4.9",
     "@angular/compiler-cli": "^4.2.4",
     "@angular/language-service": "^4.2.4",
     "@types/jasmine": "~2.5.53",
@@ -46,6 +49,6 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.3.3"
+    "typescript": "^2.3.2"
   }
 }

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit,Output } from '@angular/core';
 import { ContactService } from '../services/contact.service';
 import { Contact } from '../contact';
-  
+import { Router } from '@angular/router';  
+
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
@@ -13,12 +14,10 @@ export class ContactListComponent implements OnInit {
   contacts: Contact[];
   contact: Contact;
   contactSelected: Contact;
-  isInValidInput: Boolean;
 
-  constructor(private contactService: ContactService) {
+  constructor(private contactService: ContactService,private router: Router) {
     this.title = 'Contacts List';
     this.contacts = this.contactService.getContacts();
-    this.isInValidInput = false;
     this.contact = new Contact();
    }
 
@@ -33,20 +32,8 @@ export class ContactListComponent implements OnInit {
     this.contactSelected = null;
   }
 
-  onAddNewContact() {
-    
-    if(this.contact.firstName && this.contact.lastName && this.contact.phone && this.contact.gender
-      && this.contact.streetAddress && this.contact.city) {
-        this.contactService.addContact(this.contact);
-        this.contact.firstName = "";
-        this.contact.lastName = "";
-        this.contact.phone = "";
-        this.contact.streetAddress = "";
-        this.contact.city = "";
-        this.isInValidInput = false;   
-      } else {
-       this.isInValidInput = true;      
-      }
+  addNewContact(): void {
+    this.router.navigate(['/add-contact']);
   }
-
+  
 }

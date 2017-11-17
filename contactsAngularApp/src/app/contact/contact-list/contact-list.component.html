@@ -1,63 +1,23 @@
-<!-- (expanded)="pExpanded" #expPanel (expanded)="pExpanded" hideToggle="true" -->
-<mat-expansion-panel>
-  <mat-expansion-panel-header>
-    <mat-panel-title>Add New Contact</mat-panel-title>
-    <mat-panel-description></mat-panel-description>
-  </mat-expansion-panel-header>
-  
-  <p *ngIf="isInValidInput" class="errors" mat-line><strong>Errors!</strong><br>Please provide input for your firstname, lastname, phone number, gender, street address and city</p>
-
-  <mat-form-field>
-    <input matInput placeholder="First name" [(ngModel)]="contact.firstName" #ctrl="ngModel">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Last name" [(ngModel)]="contact.lastName" #ctrl="ngModel">
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <input matInput placeholder="Phone number" [(ngModel)]="contact.phone" #ctrl="ngModel">
-  </mat-form-field>
-   <mat-radio-group [(ngModel)]="contact.gender">
-      <mat-radio-button checked=true value="0">Female</mat-radio-button>
-      <mat-radio-button value="1">Male</mat-radio-button>
-   </mat-radio-group>
-  <br>
-  <mat-form-field>
-    <input matInput placeholder="Street Address" [(ngModel)]="contact.streetAddress" #ctrl="ngModel">
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput placeholder="City" [(ngModel)]="contact.city" #ctrl="ngModel">
-  </mat-form-field>
-  <br>  
-  <button color="primary" mat-raised-button (click)="onAddNewContact()">Add New Contact</button>
-</mat-expansion-panel>
-
-<div class="elementContainer">
-  <div class="contactList">
-  <h2> {{title}} </h2>
-  <hr>
-  <mat-list dense *ngFor="let contact of contacts" (click)="onContactSelect(contact)">
-    <!-- <app-user-info [user]="user" (contactRemoveSelected) = "onRemoveSelect(contact)"></app-user-info> -->
-    <app-contact-list-item [contact]="contact" (contactRemoveSelected) = "onRemoveSelect(contact)"></app-contact-list-item>
-  </mat-list>
+<div fxLayout="row" fxFill> 
+  <div fxFlex="" style="overflow-y: auto;" fxLayout="column" fxLayoutAlign="top left">
+    <div class="noContacts" *ngIf="contacts.length===0">No contacts available</div>
+    <mat-list dense *ngFor="let contact of contacts | customSort: 'lastName'" (click)="onContactSelect(contact)">
+      <!-- 
+        <app-user-info [user]="user" (contactRemoveSelected) = "onRemoveSelect(contact)"></app-user-info> 
+      -->
+      <app-contact-list-item [contact]="contact" (contactRemoveSelected) = "onRemoveSelect(contact)"></app-contact-list-item>
+    </mat-list>
+  </div>
 </div>
 
-<!-- tee oma komponentti tästä -->
-<div class="contactCard">
-    <h2>Contact Card</h2>
-    <hr>
-    <mat-card *ngIf="contactSelected"  class="example-card">
-        <mat-card-header>
-        <mat-card-title style="font-size: 1.2em;font-weight: 700;">{{contactSelected.firstName}} {{contactSelected.lastName | uppercase}}  <small style="font-weight: 400;font-size:0.48em;">({{contactSelected.gender==0 ? 'female': 'male'}})</small></mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          
-        <img width="35%;" src="{{contactSelected.avatar}}" alt="{{contactSelected.firstName}} {{contactSelected.lastName}}">
-          <p mat-line><strong>Phone: </strong><br> {{contactSelected.phone}} </p> 
-          <p mat-line><strong>Street Address: </strong><br> {{contactSelected.streetAddress}} </p> 
-          <p mat-line><strong>City: </strong><br>{{contactSelected.city}} </p> 
-        </mat-card-content>
-      </mat-card>
-</div>    
+<!--
+<div class="addBtnPanel" fxFlex="15" fxLayout="column" fxLayoutAlign="top left">
+    <span matTooltip="Add New Contact" position="below">
+    <button (click)="addNewContact()" class="example-fab mat-mini-fab" color="primary" 
+      mat-mini-fab=""><span class="mat-button-wrapper">
+        <mat-icon class="mat-icon material-icons" role="img" aria-hidden="true">add</mat-icon></span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+    </button>
+  </span>
 </div>
+-->
