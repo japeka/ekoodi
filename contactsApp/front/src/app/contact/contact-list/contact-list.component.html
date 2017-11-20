@@ -1,0 +1,23 @@
+<div fxLayout="row" fxFill> 
+  <div fxFlex="" style="overflow-y: auto;" fxLayout="column" fxLayoutAlign="top left">
+    <div class="noContacts" *ngIf="contacts.length===0">No contacts available</div>
+    <mat-list dense *ngFor="let contact of contacts | customSort: 'lastName'" (click)="onContactSelect(contact)">
+      <!-- 
+        <app-user-info [user]="user" (contactRemoveSelected) = "onRemoveSelect(contact)"></app-user-info> 
+      -->
+      <app-contact-list-item [contact]="contact" (contactRemoveSelected) = "onRemoveSelect(contact)"></app-contact-list-item>
+    </mat-list>
+  </div>
+</div>
+
+<!--
+<div class="addBtnPanel" fxFlex="15" fxLayout="column" fxLayoutAlign="top left">
+    <span matTooltip="Add New Contact" position="below">
+    <button (click)="addNewContact()" class="example-fab mat-mini-fab" color="primary" 
+      mat-mini-fab=""><span class="mat-button-wrapper">
+        <mat-icon class="mat-icon material-icons" role="img" aria-hidden="true">add</mat-icon></span><div class="mat-button-ripple mat-ripple mat-button-ripple-round" matripple=""></div>
+        <div class="mat-button-focus-overlay"></div>
+    </button>
+  </span>
+</div>
+-->
