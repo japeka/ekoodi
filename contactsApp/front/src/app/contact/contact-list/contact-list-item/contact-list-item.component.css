@@ -18,16 +18,7 @@ mat-list-item h4:first-letter {
 mat-list-item h4 a {
     text-decoration: none;
 }    
-/*  <h4 mat-line><a routerLink="/contacts/{{contact.id}}"> {{contact.firstName | ucfirst}} {{contact.lastName | ucfirst}} </a></h4>
-  <p mat-line><a routerLink="/contacts/{{contact.id}}"> {{ contact | contactAddress }} </a></p>
 
-<mat-list-item>
-  <mat-icon mat-list-icon>
-    <a routerLink="/contacts/{{contact.id}}">
-      <img class="avatar" src="{{contact.avatar}}"/>
-    </a>
-  </mat-icon>  
-*/
 mat-list-item:hover  {
     background-color: #EBEBF0;
 }

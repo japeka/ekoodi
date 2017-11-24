@@ -4,8 +4,9 @@ export class Contact {
       firstName: string;
       lastName: string;
       phone: string;
-      gender: number; //0 = female, 1 = male
-      avatar: string; //02  04 06   03 11 05  
+      //0 = female, 1 = male
+      gender: number; 
+      avatar: string; 
       streetAddress: string;
       city: string;
 

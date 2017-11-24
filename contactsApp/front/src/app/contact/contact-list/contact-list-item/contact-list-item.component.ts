@@ -16,12 +16,9 @@ export class ContactListItemComponent implements OnInit {
   }
 
   ngOnInit() {}
-  onRemoveSelect(contact){
-    this.contactRemoveSelected.emit(contact);
-  }
   
-  moveToUpdate(id:number): void {
-    this.router.navigate(['/contacts']);
+  onRemoveSelect(contact) {
+    this.contactRemoveSelected.emit(contact);
   }
 
 }

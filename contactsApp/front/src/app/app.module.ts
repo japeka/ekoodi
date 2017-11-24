@@ -1,43 +1,49 @@
+//@angular modules//
 import { BrowserModule } from '@angular/platform-browser';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule, MatIconModule, MatInputModule, MatListModule,MatExpansionModule,MatCardModule,MatRadioModule} from '@angular/material';
 import { MatToolbarModule } from '@angular/material';
 import { MatSidenavModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material';
-import { MatSnackBarModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LayoutModule } from '@angular/cdk/layout';
 
+//lodash//
 import * as _ from "lodash";
 
-//components
+//routing//
 import { AppRoutingModule } from './app-routing/app-routing.module';
+
+//components//
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
 import { ContactListItemComponent } from './contact/contact-list/contact-list-item/contact-list-item.component';
 import { ContactDetailsComponent } from './contact/contact-details/contact-details.component';
 import { MapComponent } from './map/map/map.component';
 import { LoginComponent } from './user/login/login.component';
 
-//services
+//services//
+import { ContactLocalStorageService } from './contact/services/contact-local-storage.service';
 import { ContactService } from './contact/services/contact.service';
+import { ContactHttpService } from './contact/services/contact-http.service';
 import { AuthenticationService } from './user/services/authentication.service';
 import { SharedService } from './shared/shared.service';
 
-//guard
+//guard//
 import { AuthenticationGuard } from './guard/authentication.guard';
 
-//pipes
-import { ContactAddressPipe } from './contact/pipes/contact-address.pipe';
+//pipes//
 import { NgPipesModule } from 'ngx-pipes';
+import { ContactAddressPipe } from './contact/pipes/contact-address.pipe';
 import { SafePipe } from './contact/pipes/safe.pipe';
 import { CustomSortPipe } from './contact/pipes/custom-sort.pipe';
 
-
-
+//App.Module//
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +59,7 @@ import { CustomSortPipe } from './contact/pipes/custom-sort.pipe';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatInputModule,
@@ -63,18 +70,20 @@ import { CustomSortPipe } from './contact/pipes/custom-sort.pipe';
     MatRadioModule,
     MatTooltipModule,
     MatSidenavModule,
-    MatSnackBarModule,
+    MatMenuModule,
     FlexLayoutModule,
     LayoutModule,
     AppRoutingModule,
     NgPipesModule
   ],
   providers: [
+    ContactLocalStorageService,
     ContactService,
+    ContactHttpService,
     AuthenticationService,
     AuthenticationGuard,
     SharedService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

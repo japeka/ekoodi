@@ -1,66 +1,66 @@
 import { Injectable } from '@angular/core';
+import { ContactLocalStorageService } from './contact-local-storage.service';
+import { ContactHttpService } from './contact-http.service';
 import { Contact } from '../contact';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import * as _ from "lodash";
 
+/* business logiikka kehitetään tänne */ 
 @Injectable()
 export class ContactService {
 
   private contacts: Contact[];
-  private avatars: string[][];
-  private avatarUrl: string;
-  constructor() {
-   this.avatars = [['02','04','06'],['03','11','05']]; 
-   this.avatarUrl = 'http://svgavatars.com/style/svg/';
-   this.contacts = this.getContactsFromStorage();
-   }
-
-   addContactsToStorage() {
-      if(this.contacts) {
-        localStorage.removeItem('contacts');
-        localStorage.setItem('contacts',JSON.stringify(this.contacts));
-      } else {
-        localStorage.removeItem('contacts');
-      }
-   }
-
-   getContactsFromStorage(): Contact[] {
-    if (typeof(Storage) !== "undefined") {
-      if(localStorage.getItem('contacts') != null) {
-        return JSON.parse(localStorage.getItem('contacts'));
-      }
-    } 
-    return [];
-   }
-
-   getAvatarPicture(gender: number) {
-    let position = Math.floor(Math.random() * 3) 
-    return this.avatarUrl + this.avatars[gender][position] + '.svg';
-   }
-   
-   getContacts(): Contact[] {
-    var json = JSON.stringify(this.contacts);
-    return this.contacts || [];
+  constructor(
+    private contactLocalStorageService: ContactLocalStorageService, 
+    private httpService: ContactHttpService ) {
+      this.contacts = [];
   }
 
-  deleteContact(contact: Contact): void {
-    this.contacts.splice(_.findIndex(this.contacts, function(o) { return o.id == contact.id; }),1);
-    this.addContactsToStorage();
-  }
-
-  addContact(contact: Contact): void {
-    if(this.contacts.length > 0) {
-      var k = 0;
-      k = _.maxBy(this.contacts, function(o) { return o.id; }).id;
-      k++;contact.id = k;
-      contact.avatar = this.getAvatarPicture(contact.gender);
-      this.contacts.push(Object.assign({}, contact));
-
+  getContacts(): Observable<Contact[]> {
+    if (_.isEmpty(this.contacts)) {
+      return this.httpService.get().map((contacts) => {
+        this.contacts = contacts;
+        return contacts;
+      });  
     } else {
-      this.contacts.push(Object.assign({}, new Contact(0,contact.firstName, contact.lastName,
-      contact.phone,contact.gender,this.getAvatarPicture(contact.gender),contact.streetAddress, contact.city)));
+      return Observable.of(this.contacts);
     }
-    this.addContactsToStorage();
   }
-  
+
+  findContactById(id: number): Observable<Contact> {
+    let cachedContact = _.find(this.contacts, {id:id});
+    if(cachedContact) {
+      return Observable.of(cachedContact);
+    } else {
+      return this.httpService.getById(id).map( (contact) => {
+        this.contacts.push(contact);
+        return contact;
+      });
+    }
+  }
+
+  addContact(_contact: Contact): Observable<Contact> {
+    return this.httpService.create(_contact).map( (contact) => {
+      this.contacts.push(contact);
+      return contact;
+    });
+  }
+
+  updateContact(_contact: Contact): Observable<Contact> {
+    return this.httpService.update(_contact).map( (contact) => {
+        let position = _.findIndex(this.contacts, function(o) { return o.id == contact.id; });
+        this.contacts[position] = contact;
+        return contact;
+    });
+  }
+
+  deleteContact(_contact: Contact): Observable<Contact> {
+    return this.httpService.delete(_contact).map( (contact) => {
+      var idx = _.findIndex(this.contacts, function(o) { return o.id == contact.id; });
+      var item = this.contacts.splice(idx,1);
+      return contact;      
+    });
+  }
 
 }

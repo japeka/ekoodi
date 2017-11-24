@@ -26,7 +26,6 @@ div.container {
 .example-sidenav-content {
     display: flex;
     height: 75vh !important;
-    /* width: 200px; */
     background-color: #FDFAF9;
     justify-content: top;
 }
@@ -51,6 +50,14 @@ div.container {
     color: #3f51b5;    
 }
 
+.matIconCustom {
+    cursor:pointer;
+}
+
+.matMenuItem {
+    font-size: 0.80em;
+} 
+
 .parent {
     display: flex;
     flex-direction: row;
@@ -64,3 +71,19 @@ div.container {
     padding: 3px !important; 
     border-radius:50% !important;
 } 
+
+.loggedUser {
+    font-size: 0.65em;
+}
+
+
+
+@media only screen and (max-width: 377px) {
+    .personIcon {
+       display: none; 
+    }    
+
+    .loggedUser {
+        display: none; 
+     }
+}

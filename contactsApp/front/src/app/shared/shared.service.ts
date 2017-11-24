@@ -11,7 +11,6 @@ export class SharedService {
    changeEmitted$ = this.emitChangeSource.asObservable();
    // Service message commands
    emitChange(change: any) {
-       console.log("emitchangessa");
        this.emitChangeSource.next(change);
    }
 

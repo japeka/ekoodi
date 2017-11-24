@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit,Output } from '@angular/core';
 import { ContactService } from '../services/contact.service';
+//import { ContactLocalStorageService } from '../services/contact-local-storage.service';
+import * as _ from "lodash";
 import { Contact } from '../contact';
 import { Router } from '@angular/router';  
 
@@ -15,25 +17,40 @@ export class ContactListComponent implements OnInit {
   contact: Contact;
   contactSelected: Contact;
 
-  constructor(private contactService: ContactService,private router: Router) {
+  constructor(private contactService: ContactService,
+      private router: Router) {
     this.title = 'Contacts List';
-    this.contacts = this.contactService.getContacts();
     this.contact = new Contact();
-   }
+    this.contacts = []; 
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.contactService.getContacts().subscribe(
+      (contacts: Contact[]) => {
+        this.contacts = contacts;
+      }, 
+      err => {
+        console.log("Error happened!");
+        return this.router.navigate(['/login']);
+      }
+    );
+  }
 
-  onContactSelect(contact: Contact) {
+  onContactSelect( contact: Contact ) {
     this.contactSelected = contact;
   }
 
-  onRemoveSelect(contact: Contact) {
-    this.contactService.deleteContact(contact);
-    this.contactSelected = null;
+  onRemoveSelect( _contact: Contact ) {
+    this.contactService.deleteContact(_contact).subscribe( 
+      (contact: Contact) => { 
+        this.contactSelected = null;
+    },
+    err => {
+      alert('Error Code: ' + err.status + ' received. Contact was not removed.');
+    });
   }
 
   addNewContact(): void {
     this.router.navigate(['/add-contact']);
   }
-  
 }
